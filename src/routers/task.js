@@ -40,12 +40,12 @@ router.get('/tasks', auth, async (req, res) => {
     }
     try {
         // limit and skip options provided to include pagination
-        // const tasks = await Task.find({ owner: req.user._id, ...match }, null, { 
-        //     limit: parseInt(req.query.limit), 
-        //     skip: parseInt(req.query.skip),
-        //     sort
-        // })
-        const tasks = await Task.find({owner: req.user._id})
+        const tasks = await Task.find({ owner: req.user._id, ...match }, null, { 
+            limit: parseInt(req.query.limit), 
+            skip: parseInt(req.query.skip),
+            sort
+        })
+        // const tasks = await Task.find({owner: req.user._id})
         // await req.user.populate('tasks').execPopulate()
         res.send(tasks)
     } catch (e) {
