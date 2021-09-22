@@ -68,7 +68,7 @@ userSchema.virtual('tasks', {
 // each user will have their very own auth tokens to prevent others from modifying their data
 userSchema.methods.generateAuthToken = async function () {
     const user = this
-    const token = jwt.sign({ _id: user._id.toString() }, 'secretstring')
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET)
 
     user.tokens = user.tokens.concat({ token })
     await user.save()
